@@ -4,7 +4,7 @@ This project demonstrates my skills in React, component state management, and CS
 
 ## Preview
 
-![To-Do List Preview](.task-tracker-app/src/preview.png)
+![To-Do List Preview](./task-tracker-app/src/preview.png)
 
 ## Features
 
