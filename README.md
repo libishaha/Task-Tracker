@@ -2,7 +2,7 @@
 
 This project demonstrates my skills in React, component state management, and CSS styling. The app allows users to create, prioritize, and track tasks. This project showcases my ability to work with React hooks, handle user input dynamically, manage component state effectively, and create beautiful, functional user interfaces with attention to design detail.
 
-## 📸 Preview
+## Preview
 
 ![To-Do List Preview](.task-tracker-app/src/preview.png)
 
@@ -15,7 +15,7 @@ This project demonstrates my skills in React, component state management, and CS
 * Timestamps on each task showing when it was created
 * Clear all completed tasks with a single button
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 * **React** for building the component-based user interface, including:
    * Hooks (`useState`) for managing task state and input
