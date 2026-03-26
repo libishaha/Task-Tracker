@@ -1,0 +1,404 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@600&family=Lato:wght@300;400;700&display=swap');
+
+/* ─── CSS Variables ──────────────────────────────────────────── */
+:root {
+  --bg:          #0d0609;
+  --card-bg:     #160b0e;
+  --card-border: #3a0d1a;
+  --rose-deep:   #8b0000;
+  --rose-mid:    #c9184a;
+  --rose-light:  #ff4d6d;
+  --rose-blush:  #ff8fa3;
+  --rose-petal:  #ffccd5;
+  --text-primary:#fff0f3;
+  --text-muted:  #a08090;
+  --task-bg:     #1f0d12;
+  --task-border: #2e1020;
+  --task-done-bg:#130809;
+  --shadow-glow: 0 0 40px rgba(201, 24, 74, 0.15);
+}
+
+/* ─── Reset & Base ───────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(139,0,0,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(201,24,74,0.08) 0%, transparent 60%);
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  font-family: 'Lato', sans-serif;
+  color: var(--text-primary);
+  padding: 40px 16px 80px;
+}
+
+/* ─── Wrapper ────────────────────────────────────────────────── */
+.app-wrapper {
+  width: 100%;
+  max-width: 560px;
+  position: relative;
+}
+
+/* ─── Card ───────────────────────────────────────────────────── */
+.todo-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 40px 36px;
+  box-shadow:
+    var(--shadow-glow),
+    inset 0 1px 0 rgba(255,204,213,0.06);
+  animation: fadeSlideIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Header ─────────────────────────────────────────────────── */
+.todo-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.petal-icon {
+  font-size: 2.8rem;
+  display: block;
+  margin-bottom: 10px;
+  animation: sway 4s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-6deg); }
+  50%       { transform: rotate(6deg); }
+}
+
+.todo-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+.todo-subtitle {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.2rem;
+  color: var(--rose-blush);
+  margin-top: 6px;
+  opacity: 0.85;
+}
+
+/* ─── Progress ───────────────────────────────────────────────── */
+.progress-section {
+  margin-bottom: 24px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.progress-percent {
+  color: var(--rose-blush);
+  font-weight: 700;
+}
+
+.progress-bar-bg {
+  background: rgba(255,255,255,0.06);
+  border-radius: 100px;
+  height: 6px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--rose-deep), var(--rose-light));
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 8px rgba(255, 77, 109, 0.5);
+}
+
+/* ─── Input Row ──────────────────────────────────────────────── */
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.task-input {
+  flex: 1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+
+.task-input::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.task-input:focus {
+  border-color: var(--rose-mid);
+  background: rgba(201, 24, 74, 0.06);
+  box-shadow: 0 0 0 3px rgba(201, 24, 74, 0.12);
+}
+
+.add-btn {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, var(--rose-mid), var(--rose-deep));
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 300;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s, box-shadow 0.25s;
+  box-shadow: 0 4px 16px rgba(201, 24, 74, 0.35);
+  line-height: 1;
+}
+
+.add-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 22px rgba(201, 24, 74, 0.55);
+}
+
+.add-btn:active {
+  transform: scale(0.95);
+}
+
+/* ─── Task List ──────────────────────────────────────────────── */
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.9rem;
+  padding: 24px 0;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--task-bg);
+  border: 1px solid var(--task-border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  transition: border-color 0.25s, background 0.25s, transform 0.15s;
+  animation: taskIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes taskIn {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.task-item:hover {
+  border-color: rgba(201, 24, 74, 0.3);
+  transform: translateX(3px);
+}
+
+.task-item.done {
+  background: var(--task-done-bg);
+  border-color: rgba(255,255,255,0.04);
+  opacity: 0.55;
+}
+
+/* ─── Check Button ───────────────────────────────────────────── */
+.check-btn {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 2px solid var(--rose-mid);
+  background: transparent;
+  color: var(--rose-mid);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  line-height: 1;
+}
+
+.check-btn:hover {
+  background: rgba(201, 24, 74, 0.15);
+  transform: scale(1.1);
+}
+
+.check-btn.checked {
+  background: var(--rose-mid);
+  border-color: var(--rose-mid);
+  color: #fff;
+}
+
+/* ─── Task Content ───────────────────────────────────────────── */
+.task-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.task-text {
+  font-size: 0.97rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: text-decoration 0.2s;
+}
+
+.done .task-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.task-time {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+/* ─── Task Actions ───────────────────────────────────────────── */
+.task-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.move-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04);
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.move-btn:hover {
+  background: rgba(201, 24, 74, 0.15);
+  border-color: var(--rose-mid);
+  color: var(--rose-blush);
+}
+
+.delete-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.delete-btn:hover {
+  background: rgba(139, 0, 0, 0.25);
+  border-color: var(--rose-deep);
+  color: var(--rose-light);
+}
+
+/* ─── Footer ─────────────────────────────────────────────────── */
+.footer-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.clear-btn {
+  background: transparent;
+  border: 1px solid var(--card-border);
+  border-radius: 100px;
+  color: var(--text-muted);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.clear-btn:hover {
+  border-color: var(--rose-mid);
+  color: var(--rose-blush);
+  background: rgba(201, 24, 74, 0.06);
+}
+
+/* ─── Confetti ───────────────────────────────────────────────── */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  animation: confettiFall 2.5s ease-in forwards;
+}
+
+@keyframes confettiFall {
+  0%   { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--rose-deep); }
